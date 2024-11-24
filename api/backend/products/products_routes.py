@@ -198,6 +198,31 @@ def get_all_categories():
     return response
 
 # ------------------------------------------------------------
+### Get 8 most sold products
+@products.route('/product',methods = ['GET'])
+def get_8_products():
+    query = '''
+        SELECT P.ProductName, S.CompanyName, count(O.OrderID) AS `Number of Orders`
+        FROM Products P JOIN Suppliers S
+            ON P.SupplierID = S.SupplierID
+                JOIN `Order Details` O
+                    ON P.ProductID = O.ProductID
+        GROUP BY P.ProductName, S.CompanyName
+        ORDER BY `Number of Orders` DESC, ProductName ASC
+        LIMIT 8;
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+
+
+# ------------------------------------------------------------
 # This is a stubbed route to update a product in the catalog
 # The SQL query would be an UPDATE. 
 @products.route('/product', methods = ['PUT'])

@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 import streamlit as st
 from modules.nav import SideBarLinks
 
-# streamlit supports reguarl and wide layout (how the controls
+# streamlit supports regular and wide layout (how the controls
 # are organized/displayed on the screen).
 st.set_page_config(layout = 'wide')
 
@@ -34,9 +34,10 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('CS 3200 Sample Semester Project App')
+st.title('CS 3200 Project APP ')
 st.write('\n\n')
-st.write('### HI! As which user would you like to log in?')
+st.write('### HI! WHO ARE YOU?')
+st.write('Just Joking haha')
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
@@ -72,6 +73,7 @@ if st.button('Act as System Administrator',
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'SysAdmin'
     st.switch_page('pages/20_Admin_Home.py')
+
 
 
 
